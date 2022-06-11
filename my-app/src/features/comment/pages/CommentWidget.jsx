@@ -43,7 +43,9 @@ const CommentWidget = () => {
         Array.isArray(posts) &&
         posts.length > 0 &&
         posts.map(({ _id, post, comments }) => {
-          return <Comment key={_id} post={post} comments={comments} />;
+          return (
+            <Comment key={_id} _id={_id} post={post} comments={comments} />
+          );
         })}
     </>
   );
