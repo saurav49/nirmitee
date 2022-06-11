@@ -4,12 +4,12 @@ const isDelete = (post, _id) => {
   if (!post.hasOwnProperty("_id")) {
     return post;
   }
-  return post._id === _id
-    ? {}
-    : {
-        ...post,
-        comments: post.comments.map((comment) => isDelete(comment, _id)),
-      };
+  return (
+    post._id !== _id && {
+      ...post,
+      comments: post.comments.map((comment) => isDelete(comment, _id)),
+    }
+  );
 };
 
 const editPost = (id, post, editPostText) => {
