@@ -20,7 +20,7 @@ const CommentWidget = () => {
 
   return (
     <>
-      <div className="px-3 py-8 rounded-md shadow-md w-300px sm:w-[500px] flex flex-col items-center justify-center">
+      <div className="px-3 py-8 rounded-md shadow-md transition-all duration-300 w-300px sm:w-[500px] flex flex-col items-center bg-white justify-center">
         <h1 className="text-2xl mb-4">Create Post</h1>
         <div className="flex flex-col items-center sm:flex-row">
           <input
