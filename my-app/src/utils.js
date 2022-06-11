@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 const isDelete = (post, _id) => {
   if (!post.hasOwnProperty("_id")) {
     return post;
@@ -10,7 +12,7 @@ const isDelete = (post, _id) => {
       };
 };
 
-function editPost(id, post, editPost) {
+const editPost = (id, post, editPost) => {
   if (!post.hasOwnProperty("_id")) {
     return;
   }
@@ -21,6 +23,24 @@ function editPost(id, post, editPost) {
         ...post,
         comments: post.comments.map((comment) => editPost(id, comment)),
       };
-}
+};
 
-export { isDelete, editPost };
+const isPresent = (post, _id, reply) => {
+  if (!post.hasOwnProperty("_id")) {
+    return post;
+  }
+  return post._id === _id
+    ? {
+        ...post,
+        comments: [
+          ...post.comments,
+          { _id: nanoid(), post: reply, comments: [] },
+        ],
+      }
+    : {
+        ...post,
+        comments: post.comments.map((comment) => isPresent(comment, _id)),
+      };
+};
+
+export { isDelete, editPost, isPresent };

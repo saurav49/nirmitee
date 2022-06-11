@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isDelete, editPost } from "../../utils";
+import { isDelete, editPost, isPresent } from "../../utils";
 
 const initialState = {
   status: "idle",
@@ -25,11 +25,6 @@ export const commentSlice = createSlice({
     },
 
     handleEdit: (state, action) => {
-      if (!action.payload) {
-        alert("edit input field cannot be empty");
-        return;
-      }
-
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -37,9 +32,18 @@ export const commentSlice = createSlice({
         ),
       };
     },
+
+    handleReply: (state, action) => {
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          isPresent(post, action.payload._id, action.payload.reply)
+        ),
+      };
+    },
   },
 });
 
-export const { handleAddPost, handleDeletePost, handleEdit } =
+export const { handleAddPost, handleDeletePost, handleEdit, handleReply } =
   commentSlice.actions;
 export default commentSlice.reducer;

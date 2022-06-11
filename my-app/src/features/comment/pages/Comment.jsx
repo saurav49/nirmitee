@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
-import { handleDeletePost, handleEdit } from "../commentSlice";
+import { handleDeletePost, handleEdit, handleReply } from "../commentSlice";
 
 const Comment = ({ _id, post, comments }) => {
   const dispatch = useDispatch();
@@ -17,6 +17,15 @@ const Comment = ({ _id, post, comments }) => {
     setEditComment("");
   };
 
+  const handlePostReply = (id) => {
+    if (!comment) {
+      alert("reply input field cannot be empty");
+      return;
+    }
+    dispatch(handleReply({ _id: id, reply: comment }));
+    setComment("");
+  };
+
   return (
     <>
       {post && (
@@ -26,7 +35,7 @@ const Comment = ({ _id, post, comments }) => {
             type="text"
             name="comment"
             value={comment}
-            placeholder="comment"
+            placeholder="Reply"
             onChange={(e) => setComment(e.target.value)}
             className="border-2 border-slate-300 p-1 mb-4 rounded-md sm:mr-2"
           />
@@ -52,7 +61,7 @@ const Comment = ({ _id, post, comments }) => {
               edit
             </button>
             <button
-              onClick={() => dispatch(handleDeletePost(_id))}
+              onClick={() => dispatch(handlePostReply(_id))}
               className="bg-blue-500 hover:bg-blue-400 text-sm text-white font-bold py-1 px-3 border-b-4 active:border-b-0 mt-2 sm:mt-0 border-blue-700 hover:border-emerald-500 rounded uppercase mr-5"
             >
               comment
@@ -61,16 +70,9 @@ const Comment = ({ _id, post, comments }) => {
           {comments &&
             Array.isArray(comments) &&
             comments.length > 0 &&
-            comments.map((comment) => {
+            comments.map(({ post, comments, _id }) => {
               return (
-                <Comment
-                // text={comment.text}
-                // comments={comment.comments}
-                // key={comment._id}
-                // id={comment._id}
-                // setComments={setComments}
-                // allcomments={allcomments}
-                />
+                <Comment post={post} comments={comments} key={_id} _id={_id} />
               );
             })}
         </div>
