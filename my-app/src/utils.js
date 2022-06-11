@@ -12,16 +12,18 @@ const isDelete = (post, _id) => {
       };
 };
 
-const editPost = (id, post, editPost) => {
+const editPost = (id, post, editPostText) => {
   if (!post.hasOwnProperty("_id")) {
     return;
   }
 
   return post._id === id
-    ? { ...post, post: editPost }
+    ? { ...post, post: editPostText }
     : {
         ...post,
-        comments: post.comments.map((comment) => editPost(id, comment)),
+        comments: post.comments.map((comment) =>
+          editPost(id, comment, editPostText)
+        ),
       };
 };
 
@@ -39,7 +41,9 @@ const isPresent = (post, _id, reply) => {
       }
     : {
         ...post,
-        comments: post.comments.map((comment) => isPresent(comment, _id)),
+        comments: post.comments.map((comment) =>
+          isPresent(comment, _id, reply)
+        ),
       };
 };
 

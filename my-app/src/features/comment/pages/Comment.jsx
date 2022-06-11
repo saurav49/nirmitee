@@ -29,7 +29,7 @@ const Comment = ({ _id, post, comments }) => {
   return (
     <>
       {post && (
-        <div className="px-3 py-8 rounded-md shadow-md w-300px sm:w-[500px] my-2 border-l-8 border-l-emerald-500">
+        <div className="px-3 py-8 rounded-md shadow-md w-50 my-2 border-l-8 border-l-emerald-500">
           <p className="text-lg">{post}</p>
           <input
             type="text"

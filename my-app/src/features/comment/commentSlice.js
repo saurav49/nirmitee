@@ -34,6 +34,7 @@ export const commentSlice = createSlice({
     },
 
     handleReply: (state, action) => {
+      console.log(action.payload);
       return {
         ...state,
         posts: state.posts.map((post) =>
