@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { isDelete, editPost, isPresent } from "../../utils";
 
 const initialState = {
@@ -25,7 +25,6 @@ export const commentSlice = createSlice({
     },
 
     handleEdit: (state, action) => {
-      console.log(current(state), action.payload);
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -35,7 +34,6 @@ export const commentSlice = createSlice({
     },
 
     handleReply: (state, action) => {
-      console.log(current(state), action.payload);
       return {
         ...state,
         posts: state.posts.map((post) =>
