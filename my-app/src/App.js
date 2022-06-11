@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-col items-center justify-center mt-4">
       <CommentWidget />
     </div>
   );

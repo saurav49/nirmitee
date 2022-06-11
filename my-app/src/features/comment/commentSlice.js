@@ -2,21 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   status: "idle",
-  comments: [],
+  posts: [],
 };
 
 export const commentSlice = createSlice({
   name: "comment",
   initialState,
   reducers: {
-    handleAddComment: (state, action) => {
+    handleAddPost: (state, action) => {
       return {
         ...state,
-        comments: [...state.comments, action.payload],
+        posts: [...state.posts, action.payload],
       };
     },
   },
 });
 
-export const { handleAddComment } = commentSlice.actions;
+export const { handleAddPost } = commentSlice.actions;
 export default commentSlice.reducer;
