@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { isDelete, editPost, isPresent } from "../../utils";
 
 const initialState = {
@@ -25,19 +25,21 @@ export const commentSlice = createSlice({
     },
 
     handleEdit: (state, action) => {
+      console.log(current(state), action.payload);
       return {
         ...state,
         posts: state.posts.map((post) =>
-          editPost(action.payload.id, post, action.payload.editPost)
+          editPost(action.payload.id, post, action.payload.editComment)
         ),
       };
     },
 
     handleReply: (state, action) => {
+      console.log(current(state), action.payload);
       return {
         ...state,
         posts: state.posts.map((post) =>
-          isPresent(post, action.payload._id, action.payload.reply)
+          isPresent(post, action.payload.id, action.payload.comment)
         ),
       };
     },

@@ -12,7 +12,7 @@ const Comment = ({ _id, post, comments }) => {
       alert("edit input field cannot be empty");
       return;
     }
-    dispatch(handleEdit({ id: id, editPost: editComment }));
+    dispatch(handleEdit({ id, editComment }));
     setEditComment("");
   };
 
@@ -21,7 +21,7 @@ const Comment = ({ _id, post, comments }) => {
       alert("reply input field cannot be empty");
       return;
     }
-    dispatch(handleReply({ _id: id, reply: comment }));
+    dispatch(handleReply({ id, comment }));
     setComment("");
   };
 

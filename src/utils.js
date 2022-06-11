@@ -14,7 +14,7 @@ const isDelete = (post, _id) => {
 
 const editPost = (id, post, editPostText) => {
   if (!post.hasOwnProperty("_id")) {
-    return;
+    return post;
   }
 
   return post._id === id
